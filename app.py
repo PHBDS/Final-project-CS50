@@ -1,4 +1,3 @@
-import os
 import secrets
 from functools import wraps
 from flask import Flask, flash, redirect, render_template, request, session, url_for
@@ -158,7 +157,6 @@ def index():
     if request.method == "POST":
         #if new item form
         if 'new_item' in request.form:
-            print("new_item")
             add_item=request.form.get("product")
             add_category=request.form.get("category")
             if not add_item:
@@ -182,14 +180,11 @@ def index():
             #get category id
             cat_id = db.execute("SELECT id FROM category WHERE  UPPER(category)  =  UPPER(:category) AND user_id = :user_id"
                        ,category=add_category, user_id=session["user_id"] )[0]['id']
-            print("cat_id is "+str(cat_id))
             #if product already exist, just change qty
             item_count = db.execute("SELECT COUNT(ID) FROM items WHERE category_id = :cat_id AND user_id = :user_id AND UPPER(item) = UPPER(:item)",
                                     cat_id=cat_id, user_id=session["user_id"], item=add_item)[0]['COUNT(ID)']
-            print("item_count is "+str(item_count))
 
             if item_count != 0:
-                print("changing qty")
                 db.execute("UPDATE items SET qty = :qty WHERE  category_id  =  :category_id AND user_id= :user_id AND  UPPER(item) =  UPPER(:item)",
                     user_id=session["user_id"], 
                     category_id=cat_id, 
@@ -203,21 +198,14 @@ def index():
                     category_id=cat_id, 
                     item=add_item, 
                     qty=add_quantity)
-                print("completly new prod")
         
         
         
         elif 'mark_as_bought' in request.form:
-            print("marking as bought")
             item_id = request.form.get("item_id")
             category_id = request.form.get("category_id")
             user_id = session["user_id"]
             item_name = request.form.get("item")
-            print(str(item_id),"itemid")
-            print(str(category_id),"category_id")
-            print(str(user_id),"user_id")
-            print(str(item_name),"item_name")
-            print("Form data received:", request.form)
 
             if item_id and category_id and user_id:
                 # Check if the item exists with the given category_id and user_id
@@ -246,7 +234,7 @@ def index():
                 message_type = "danger"
      
                 return redirect(url_for('index', message=message,message_type=message_type))
-            return redirect("/")
+
         
         
         elif 'update_quantity' in request.form:
@@ -303,7 +291,6 @@ def index():
        
        
        # Query the database to get all items for the current user
-        print("Products data:")
         products = db.execute("""
             SELECT items.id AS item_id, category_id, category.category, items.item, items.qty
             FROM items
