@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   Register
+{% endblock %}
+
+{% block main %}
+    <form action="{{url_for ('register')}}" method="post">
+        <div>
+            <input autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+        </div>
+
+        <div>
+            <input  autofocus class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+
+        <div>
+            <input  autofocus class="form-control mx-auto w-auto" name="confirmation" placeholder="Retype password" type="password">
+        </div>
+
+
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}
+
