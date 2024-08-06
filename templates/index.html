@@ -42,7 +42,7 @@
                 <tbody>
                     {% for product in products %}
                     <tr>
-                        <td>{{ product['category'] }}</td>
+                        <td class="table-category">{{ product['category'] }}</td>
                         <td>{{ product['item'] }}</td>
                         <td>{{ product['qty'] }}</td>
                         <td>
@@ -84,14 +84,14 @@
                 <tbody>
                     {% for product in bought_products %}
                     <tr>
-                        <td>{{ product['category'] }}</td>
+                        <td  class="table-category">{{ product['category'] }}</td>
                         <td>{{ product['item'] }}</td>
                         <td>
                             <form action="{{ url_for('index') }}" method="post" style="display:inline;">
                                 <input type="hidden" name="item_id" value="{{ product['item_id'] }}">
                                 <input type="hidden" name="category_id" value="{{ product['category_id'] }}">
                                 <input type="hidden" name="item" value="{{ product['item'] }}">
-                                <input type="text" name="new_quantity" placeholder="Quantity">
+                                <input type="text" name="new_quantity" placeholder="Quantity" class="nowrap">
                             </form>
                         </td>
                         <td>
@@ -99,20 +99,23 @@
                                 <input type="hidden" name="item_id" value="{{ product['item_id'] }}">
                                 <input type="hidden" name="category_id" value="{{ product['category_id'] }}">
                                 <input type="hidden" name="item" value="{{ product['item'] }}">
-                                <button type="submit" name="update_quantity" class="btn btn-primary">Add to list</button>
+                                <button type="submit" name="update_quantity" class="btn btn-primary nowrap-btn">Add to list</button>
                             </form>
                         </td>
                         <td>
                             <form action="{{ url_for('index') }}" method="post" style="display:inline;">
                                 <input type="hidden" name="item_id" value="{{ product['item_id'] }}">
                                 <input type="hidden" name="category_id" value="{{ product['category_id'] }}">
-                                <button type="submit" name="delete_item" class="btn btn-danger">Remove</button>
+                                <button type="submit" name="delete_item" class="btn btn-danger nowrap-btn">Remove</button>
                             </form>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         </div>
         {% else %}
             <p class="text-center">No items.</p>

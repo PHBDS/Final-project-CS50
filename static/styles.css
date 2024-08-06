@@ -9,7 +9,7 @@
 }
 
 .table-action-col {
-  width: 1px;
+  width: 1%;
   white-space: nowrap;
   text-align: center;
 }
@@ -32,4 +32,18 @@
 
 .table-container {
   margin-top: 20px;
+  overflow-x: auto;
+
 }
+
+.table-category {
+  white-space: nowrap;
+  min-width: 50px;
+  width: 1%;
+
+}
+
+.nowrap-btn {
+  white-space: nowrap;
+}
+
